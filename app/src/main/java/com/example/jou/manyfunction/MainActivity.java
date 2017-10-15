@@ -1,13 +1,19 @@
 package com.example.jou.manyfunction;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog.Builder alertdialog;
     TextView txv;
     Spinner spn;
-    Button date;
+    Button date,btn;
     ArrayAdapter<String> arrayAdapter;
     ArrayList<String> arrayList;
     ImageGenerator imageGenerator;
@@ -36,18 +42,22 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     Calendar ccc;
     EditText edt;
+    View v;
     DatePickerDialog mdatepicker;
+    Toast toast;
     int y,m,d;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        btn = (Button)findViewById(R.id.btn);
         txv = (TextView)findViewById(R.id.txv);
         spn = (Spinner)findViewById(R.id.spn);
         edt =(EditText)findViewById(R.id.edt);
         imageView =(ImageView)findViewById(R.id.imageView);
         date = (Button)findViewById(R.id.date);
+
 
         imageGenerator = new ImageGenerator(MainActivity.this);
         imageGenerator.setIconSize(100,100);
@@ -58,10 +68,27 @@ public class MainActivity extends AppCompatActivity {
         imageGenerator.setDateColor(Color.BLACK);
         imageGenerator.setMonthColor(Color.BLACK);
 
+        LayoutInflater lll = getLayoutInflater();
+        v =lll.inflate(R.layout.tttt,null);
+
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent();
+                it.setClass(MainActivity.this,Main2Activity.class);
+                startActivity(it);
+
+
+            }});
+
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 ccc = Calendar.getInstance();
                 y = ccc.get(Calendar.YEAR);
                 m = ccc.get(Calendar.MONTH);
@@ -91,26 +118,41 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_item,arrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
 
-        spn.setAdapter(arrayAdapter);
+        CustomSpinner sfs=new CustomSpinner(MainActivity.this);
+        spn.setAdapter(sfs);
+
+
         spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String msg =adapterView.getSelectedItem().toString().trim();
-                if(msg != null){
-                    Toast t=Toast.makeText(MainActivity.this,msg,Toast.LENGTH_LONG);
-                    t.show();}
-            }
+
+
+                if(i!=0 &&i !=1 && i != 2){
+
+                    }
+                else if(i==1){
+                    BlankFragment fff =new BlankFragment();
+                    fff.show(getSupportFragmentManager(),"B");
+                }
+                else if(i==2){
+
+                    toast=Toast.makeText(MainActivity.this,"我要當老師",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER,0,0);
+                    toast.setView(v);
+                    toast.show();
+                }}
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }});
-
     }
-
 
     public void onStart(){
         super.onStart();
+
+
+
         alertdialog=new AlertDialog.Builder(MainActivity.this);
 
         final String[]rrr =getResources().getStringArray(R.array.bbb);
