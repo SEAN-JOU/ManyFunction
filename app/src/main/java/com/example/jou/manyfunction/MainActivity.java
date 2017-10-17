@@ -1,19 +1,17 @@
 package com.example.jou.manyfunction;
 
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -149,44 +147,46 @@ public class MainActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
 
+    }
+public  void onResume(){
+    super.onResume();
+    alertdialog=new AlertDialog.Builder(MainActivity.this);
 
+    final String[]rrr =getResources().getStringArray(R.array.bbb);
+    final boolean[]sss =new boolean[rrr.length];
 
-        alertdialog=new AlertDialog.Builder(MainActivity.this);
+    alertdialog.setTitle("非常好");
+    alertdialog.setMultiChoiceItems(rrr, sss, new DialogInterface.OnMultiChoiceClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
+            if(sss[i]){
+                Toast.makeText(MainActivity.this,"你選了"+rrr[i],Toast.LENGTH_SHORT).show();
+            }
+        }});
 
-        final String[]rrr =getResources().getStringArray(R.array.bbb);
-        final boolean[]sss =new boolean[rrr.length];
+    alertdialog.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
 
-        alertdialog.setTitle("非常好");
-        alertdialog.setMultiChoiceItems(rrr, sss, new DialogInterface.OnMultiChoiceClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
-                if(sss[i]){
-                    Toast.makeText(MainActivity.this,"你選了"+rrr[i],Toast.LENGTH_SHORT).show();
-                }
-            }});
+            StringBuilder result=new StringBuilder();
+            for(int w=0; w<sss.length ; w++){
+                if(sss[w]){
+                    result.append(rrr[w]).append("\n");
+                    txv.setText(result);}
+            }}});
+    alertdialog.setNeutralButton("清除",new DialogInterface.OnClickListener(){
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
 
-        alertdialog.setPositiveButton("確定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        }});
+    alertdialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
 
-                StringBuilder result=new StringBuilder();
-                for(int w=0; w<sss.length ; w++){
-                    if(sss[w]){
-                        result.append(rrr[w]).append("\n");
-                        txv.setText(result);}
-                }}});
-        alertdialog.setNeutralButton("清除",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        }});
+    alertdialog.show();
 
-
-            }});
-        alertdialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }});
-        alertdialog.show();
-    }}
+}}
 
 
