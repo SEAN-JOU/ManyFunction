@@ -3,10 +3,12 @@ package com.example.jou.manyfunction;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -21,11 +23,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.ToggleButton;
 import com.kd.dynamic.calendar.generator.ImageGenerator;
-
 import java.util.ArrayList;
 import java.util.Calendar;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     DatePickerDialog mdatepicker;
     Toast toast;
     int y,m,d;
+    ToggleButton tog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         edt =(EditText)findViewById(R.id.edt);
         imageView =(ImageView)findViewById(R.id.imageView);
         date = (Button)findViewById(R.id.date);
+        tog=(ToggleButton)findViewById(R.id.tog);
 
 
         imageGenerator = new ImageGenerator(MainActivity.this);
@@ -69,7 +74,20 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater lll = getLayoutInflater();
         v =lll.inflate(R.layout.tttt,null);
 
+        tog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if(tog.isChecked()){
+                    WifiManager wifiManager =(WifiManager)getSystemService(Context.WIFI_SERVICE);
+                    wifiManager.setWifiEnabled(true);
+                }
+                else{
+                    WifiManager wifiManager =(WifiManager)getSystemService(Context.WIFI_SERVICE);
+                    wifiManager.setWifiEnabled(false);
+                }
+
+            }});
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,6 +7,8 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -16,10 +18,12 @@ import android.widget.TabHost;
 public class Main3Activity extends  AppCompatActivity {
     TabHost mTabHost;
     ProgressBar pbp;
+    WebView myWebView;
     ProgressDialog pd;
     RadioGroup r1;
     RadioButton s1,s2;
     Button execute1,dialogppp,shine1,button4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +36,13 @@ public class Main3Activity extends  AppCompatActivity {
 
         mTabHost = (TabHost)findViewById(R.id.tabHost);
         mTabHost.setup();
-
+        myWebView = (WebView) findViewById(R.id.aaa);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("https://www.google.com.tw/?gws_rd=ssl");
         TabHost.TabSpec tab1 = mTabHost.newTabSpec("0");
         tab1.setIndicator("红色");
-        tab1.setContent(R.id.tab3);
+        tab1.setContent(R.id.tab2);
         mTabHost.addTab(tab1);
 
         mTabHost.addTab(mTabHost
@@ -46,6 +53,10 @@ public class Main3Activity extends  AppCompatActivity {
         mTabHost.addTab(mTabHost.newTabSpec("2")
                 .setIndicator("蓝色")
                 .setContent(R.id.tab3));
+
+        mTabHost.getTabWidget().getChildAt(0).setBackgroundColor(Color.RED);
+        mTabHost.getTabWidget().getChildAt(1).setBackgroundColor(Color.GREEN);
+        mTabHost.getTabWidget().getChildAt(2).setBackgroundColor(Color.YELLOW);
 
         execute1=(Button)findViewById(R.id.execute1);
         dialogppp=(Button)findViewById(R.id.dialogppp);
@@ -131,7 +142,20 @@ public class Main3Activity extends  AppCompatActivity {
 
             }});
 
-    }}
+
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (myWebView.getUrl().contains("index.html"))
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+            myWebView.goBack();
+        }}}
 
 
 
