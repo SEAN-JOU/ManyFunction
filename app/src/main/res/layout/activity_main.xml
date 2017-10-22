@@ -9,7 +9,7 @@
     tools:layout_editor_absoluteX="0dp">
 
     <TextView
-        android:id="@+id/txv"
+        android:id="@+id/txv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -50,10 +50,10 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/edt"
         android:layout_marginTop="42dp"
-        app:layout_constraintTop_toBottomOf="@+id/txv"
+        app:layout_constraintTop_toBottomOf="@+id/txv1"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="44dp"
-        app:layout_constraintLeft_toRightOf="@+id/txv" />
+        app:layout_constraintLeft_toRightOf="@+id/txv1" />
 
     <EditText
         android:id="@+id/edt"

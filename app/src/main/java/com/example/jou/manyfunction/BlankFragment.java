@@ -4,60 +4,91 @@ package com.example.jou.manyfunction;
 
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentProvider;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BlankFragment extends DialogFragment {
 
 
-    EditText user, password;
+    ListView sss;
+    View view;
+    EditText title,context;
+    AlertDialog yyy;
+    qwe qqq;
+    ListAdapter adapter;
+    String etitle,econtext;
 
+
+    public interface qwe {
+        void sure(Shrimp shrimp);
+
+    }
 
     public BlankFragment() {
     }
 
 
+
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.fragment_blank, null);
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();//取得片段當前關聯的活動 取得緩存的LayoutInflater用於片段的視圖。
-        View view = inflater.inflate(R.layout.fragment_blank, null);//取得R.layout.fragment_blank
+        title= (EditText) view.findViewById(R.id.title);
+        context = (EditText) view.findViewById(R.id.context);
 
 
-        user = (EditText) view.findViewById(R.id.user);
-        password = (EditText) view.findViewById(R.id.password);
+        try {
+            qqq = (qwe) getActivity();
+        } catch (Exception f) {
+        }
+
+        sss=(ListView)view.findViewById(R.id.listView);
+        Activity aaa=getActivity();
+
+
 
         AlertDialog.Builder bbb = new AlertDialog.Builder(getActivity());//新稱一個
         bbb.setView(view);
-        bbb.setPositiveButton("登入", new DialogInterface.OnClickListener() {
+        bbb.setPositiveButton("新增", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                Shrimp shrimp = getshrimp();
+                qqq.sure(shrimp);
+            }});
 
-
-            }
-        });
         bbb.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
-
-            }
-        });
+            }});
         return bbb.create();
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_blank, container, false);
-    }}
+    }
+    private Shrimp getshrimp(){
+        etitle=title.getText().toString();
+        econtext=context.getText().toString();
+        return new Shrimp(etitle,econtext);
+}}

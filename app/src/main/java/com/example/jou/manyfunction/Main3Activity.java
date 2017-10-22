@@ -148,7 +148,7 @@ public class Main3Activity extends  AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if (!myWebView.getUrl().contains("index.html"))
+        if (myWebView.getUrl().contains("index.html"))
         {
             myWebView.goBack();
         }

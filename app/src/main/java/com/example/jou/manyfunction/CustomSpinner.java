@@ -42,7 +42,7 @@ public class CustomSpinner extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v =aaa.getLayoutInflater().inflate(R.layout.layout,null);
 
-        TextView txv =(TextView)v.findViewById(R.id.txv);
+        TextView txv =(TextView)v.findViewById(R.id.txv1);
         ImageView imv =(ImageView)v.findViewById(R.id.imv);
         arrayimage = aaa.getResources().obtainTypedArray(R.array.nba_logs);/*取得類型陣列*/
         String[] avv =aaa.getResources().getStringArray(R.array.nba);/*取得字串陣列*/

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn = (Button)findViewById(R.id.btn);
-        txv = (TextView)findViewById(R.id.txv);
+        txv = (TextView)findViewById(R.id.txv1);
         spn = (Spinner)findViewById(R.id.spn);
         edt =(EditText)findViewById(R.id.edt);
         imageView =(ImageView)findViewById(R.id.imageView);
@@ -201,6 +201,12 @@ public  void onResume(){
     alertdialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
+
+            Intent aa = new Intent();
+            aa.setClass(MainActivity.this,Main4Activity.class);
+            startActivity(aa);
+
+
 
         }});
     alertdialog.show();
