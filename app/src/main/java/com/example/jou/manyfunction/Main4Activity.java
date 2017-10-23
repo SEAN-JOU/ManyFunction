@@ -47,7 +47,4 @@ public class Main4Activity extends AppCompatActivity implements BlankFragment.qw
         listshrimp.add(shrimp);
         listV.setAdapter(listAdapte);
         listAdapte.notifyDataSetChanged();
-    }
-
-
-}
+    }}
