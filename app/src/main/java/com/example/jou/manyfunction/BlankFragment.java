@@ -1,10 +1,4 @@
 package com.example.jou.manyfunction;
-
-
-
-
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -14,20 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ListView;
-
 
 
 public class BlankFragment extends DialogFragment {
 
 
-    ListView sss;
     EditText title,context;
-    qwe qqq;
+    FragmentInterface fragmentInterface;
     String etitle,econtext;
 
 
-    public interface qwe {
+    public interface FragmentInterface {
         void sure(Shrimp shrimp);
 
     }
@@ -49,14 +40,8 @@ public class BlankFragment extends DialogFragment {
 
 
         try {
-            qqq = (qwe) getActivity();
-        } catch (Exception f) {
-        }
-
-        /*sss=(ListView)view.findViewById(R.id.listView);
-        Activity aaa=getActivity();*/
-
-
+            fragmentInterface = (FragmentInterface) getActivity();
+        } catch (Exception e) {}
 
         AlertDialog.Builder bbb = new AlertDialog.Builder(getActivity());//新稱一個
         bbb.setView(view);
@@ -64,7 +49,7 @@ public class BlankFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Shrimp shrimp = getshrimp();
-                qqq.sure(shrimp);
+                fragmentInterface.sure(shrimp);
             }});
 
         bbb.setNegativeButton("取消", new DialogInterface.OnClickListener() {

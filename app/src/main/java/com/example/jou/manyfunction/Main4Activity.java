@@ -9,7 +9,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main4Activity extends AppCompatActivity implements BlankFragment.qwe {
+public class Main4Activity extends AppCompatActivity implements BlankFragment.FragmentInterface {
 
     ListView listV;
     Button btn;
@@ -30,20 +30,18 @@ public class Main4Activity extends AppCompatActivity implements BlankFragment.qw
         btn=(Button)findViewById(R.id.btn);
 
 
-
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 fff =new BlankFragment();
-                fff.show(getSupportFragmentManager(),"B");
+                fff.show(getSupportFragmentManager(),null);
 
             }});}
 
     @Override
     public void sure(Shrimp shrimp) {
-        listAdapte=new ListAdapter(this);
+        listAdapte=new ListAdapter(Main4Activity.this);
         listshrimp.add(shrimp);
         listV.setAdapter(listAdapte);
         listAdapte.notifyDataSetChanged();
