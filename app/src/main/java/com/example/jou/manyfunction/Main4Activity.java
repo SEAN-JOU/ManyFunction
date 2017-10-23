@@ -13,10 +13,11 @@ public class Main4Activity extends AppCompatActivity implements BlankFragment.qw
 
     ListView listV;
     Button btn;
-    ListAdapter listAdapte;
     List<Shrimp> listshrimp = new ArrayList<>();
+    BlankFragment fff;
+    ListAdapter listAdapte;
 
-    public List<Shrimp> getMcoffeelist()//物件+方法名稱
+    public List<Shrimp> getMcoffeelist()
     {return listshrimp;}
 
 
@@ -30,23 +31,22 @@ public class Main4Activity extends AppCompatActivity implements BlankFragment.qw
 
 
 
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                BlankFragment fff =new BlankFragment();
+                fff =new BlankFragment();
                 fff.show(getSupportFragmentManager(),"B");
 
             }});}
 
     @Override
     public void sure(Shrimp shrimp) {
-        listAdapte =new ListAdapter(this);
+        listAdapte=new ListAdapter(this);
         listshrimp.add(shrimp);
         listV.setAdapter(listAdapte);
         listAdapte.notifyDataSetChanged();
-
-
     }
 
 

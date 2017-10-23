@@ -28,11 +28,8 @@ public class BlankFragment extends DialogFragment {
 
 
     ListView sss;
-    View view;
     EditText title,context;
-    AlertDialog yyy;
     qwe qqq;
-    ListAdapter adapter;
     String etitle,econtext;
 
 
@@ -87,7 +84,7 @@ public class BlankFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_blank, container, false);
     }
-    private Shrimp getshrimp(){
+    public Shrimp getshrimp(){
         etitle=title.getText().toString();
         econtext=context.getText().toString();
         return new Shrimp(etitle,econtext);

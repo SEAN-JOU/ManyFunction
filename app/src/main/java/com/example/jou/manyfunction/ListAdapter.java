@@ -20,7 +20,7 @@ public class ListAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return 1;
+        return aaa.getMcoffeelist().size();
     }
 
     @Override
